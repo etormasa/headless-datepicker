@@ -10,10 +10,10 @@ import DatePicker
         Headless Date Picker
       </h1>
 
-      <!-- <p>
+      <p>
         Framework-independent calendar
         engine with a Vue presentation layer.
-      </p> -->
+      </p>
 
       <DatePicker />
     </section>

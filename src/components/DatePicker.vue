@@ -104,10 +104,6 @@ const months =
     },
   )
 
-/*
-  Stable year range:
-  current year ±100.
-*/
 const referenceYear =
   Temporal.Now.plainDateISO().year
 
@@ -495,14 +491,6 @@ function moveActiveDate(
     nextPage
 
   if (changedMonth) {
-    /*
-      The focused day belongs
-      to the page Vue is about
-      to remove.
-
-      Temporarily focus the
-      calendar container.
-    */
     shouldFocusAfterTransition =
       true
 
@@ -586,10 +574,6 @@ function handleKeydown(
     }
   }
 
-  /*
-    ESTOS VAN FUERA DE handleKeydown()
-  */
-
   onMounted(() => {
     document.addEventListener(
       'pointerdown',
@@ -603,6 +587,19 @@ function handleKeydown(
       handleDocumentPointerDown,
     )
   })
+
+  function formatInputDate(
+    date: Temporal.PlainDate,
+  ): string {
+    return date.toLocaleString(
+      'en-US',
+      {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+      },
+    )
+  }
 
 </script>
 
@@ -624,10 +621,7 @@ function handleKeydown(
       ref="inputRef"
       type="text"
       readonly
-      :value="
-        state.selectedDate
-          .toString()
-      "
+      :value="formatInputDate(state.selectedDate)"
       aria-haspopup="dialog"
       :aria-expanded="isOpen"
       aria-controls="datepicker-calendar"
